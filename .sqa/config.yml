@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/rcauth-eu/aarc-delegation-server:
+      branch: 0.2.4-release
+      repo: https://github.com/rcauth-eu/aarc-delegation-server
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/rcauth-eu/aarc-delegation-server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-xanthic-lion.sh
+        container: qc.acc_lousy-auburn-mouse
+  QC.Doc:
+    repos:
+      github.com/rcauth-eu/aarc-delegation-server find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-taupe-ray.sh
+        container: qc.doc_squeaky-zucchini-magpie
+      github.com/rcauth-eu/aarc-delegation-server git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-ecru-moose.sh
+        container: qc.doc_squeaky-chartreuse-cat
+      github.com/rcauth-eu/aarc-delegation-server markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-firebrick-heron.sh
+        container: qc.doc_crappy-bronze-ocelot
+  QC.Lic:
+    repos:
+      github.com/rcauth-eu/aarc-delegation-server licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-cream-fossa.sh
+        container: qc.lic_sleepy-orange-monster
+  QC.Sty:
+    repos:
+      github.com/rcauth-eu/aarc-delegation-server checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-peach-flounder.sh
+        container: qc.sty_squeaky-ochre-sloth
+  QC.Ver:
+    repos:
+      github.com/rcauth-eu/aarc-delegation-server get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-rose-booby.sh
+        container: qc.ver_crabby-corn-duck
+timeout: 5400
